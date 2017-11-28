@@ -5,10 +5,10 @@ class Counter extends React.Component {
   render() {
     return (
       <div className="counter">
-        <button onClick={() => this.props.increment(this.props.counterIndex)}>+</button>
+        <button onClick={this.props.increment}>+</button>
         <div className="count">{this.props.count}</div>
-        <button onClick={() => this.props.decrement(this.props.counterIndex)}>-</button>
-        <button onClick={() => this.props.removeCounter(this.props.counterIndex)}>Remove</button>
+        <button onClick={this.props.decrement}>-</button>
+        <button onClick={this.props.removeCounter}>Remove</button>
       </div>
     );
   }

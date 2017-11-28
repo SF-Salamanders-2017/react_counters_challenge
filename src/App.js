@@ -20,7 +20,7 @@ class App extends React.Component {
           multiplier: 3
         }
       ],
-      total: 0,
+      // total: 4,
       newMultiplier: 0
     };
 
@@ -36,20 +36,18 @@ class App extends React.Component {
     const counters = this.state.counters
     const multiplier = counters[index].multiplier
     counters[index].count += counters[index].multiplier
-    const total = this.total(counters)
-    this.setState({ counters, total })
+    this.setState({ counters })
   }
 
   decrement(index) {
     const counters = this.state.counters
     const multiplier = counters[index].multiplier
     counters[index].count -= counters[index].multiplier
-    const total = this.total(counters)
-    this.setState({ counters, total })
+    this.setState({ counters })
   }
 
-  total(counters) {
-    return counters.reduce(function (sum, counter) {
+  total() {
+    return this.state.counters.reduce(function (sum, counter) {
       return sum + counter.count;
     }, 0);
   }
@@ -112,7 +110,7 @@ class App extends React.Component {
 
         <div className="counter">
           <button>Total</button>
-          <div className="count">{this.state.total}</div>
+          <div className="count">{this.total()}</div>
           <button>counts</button>
         </div>
       </div>
