@@ -46,14 +46,22 @@ class App extends React.Component {
 
   total(counters) {
     return counters.reduce(function (sum, counter) {
-      return counter.count + sum;
+      return sum + counter.count;
     }, 0);
   }
 
   render() {
     return (
       <div className="page-center-frame">
-        <Counter
+        {(this.state.counters).map((counter, index) =>
+          <Counter
+            increment={() => this.increment(index)}
+            decrement={() => this.decrement(index)}
+            count={counter.count}
+          />
+        )}
+
+        {/* <Counter
           increment={this.increment}
           decrement={this.decrement}
           counterIndex={0}
@@ -70,7 +78,8 @@ class App extends React.Component {
           decrement={this.decrement}
           counterIndex={2}
           count={this.state.counters[2].count}
-        />
+        /> */}
+
         <div className="counter">
           <button>Total</button>
           <div className="count">{this.state.total}</div>
