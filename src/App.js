@@ -29,6 +29,7 @@ class App extends React.Component {
     this.total = this.total.bind(this)
     this.addCounter = this.addCounter.bind(this)
     this.handleMultiplierChange = this.handleMultiplierChange.bind(this)
+    this.removeCounter = this.removeCounter.bind(this)
   }
 
   increment(index) {
@@ -64,6 +65,12 @@ class App extends React.Component {
     this.setState({ counters, newMultiplier: 0 })
   }
 
+  removeCounter(index) {
+    const counters = this.state.counters
+    counters.splice(index, 1)
+    this.setState({ counters })
+  }
+
   render() {
     return (
       <div className="page-center-frame">
@@ -80,6 +87,7 @@ class App extends React.Component {
             increment={() => this.increment(index)}
             decrement={() => this.decrement(index)}
             count={counter.count}
+            removeCounter={() => this.removeCounter(index)}
           />
         )}
 
