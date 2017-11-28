@@ -12,4 +12,4 @@ class CounterTotal extends React.Component {
   }
 }
 
-export default CounterTotal
+export default CounterTotal;

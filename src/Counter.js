@@ -30,9 +30,10 @@ class Counter extends React.Component {
         <button onClick={ this.props.incrementProp }>+</button>
         <div className="count">{ this.props.count }</div>
         <button onClick={ this.props.decrementProp }>-</button>
+        <button onClick={this.props.remove}>X</button>
       </div>
     );
   }
 }
 
-export default Counter
+export default Counter;
