@@ -13,11 +13,12 @@ class Counter extends React.Component {
   }
 
   increment() {
-    this.setState({ count: this.state.count + 1 })
+    this.setState({ count: this.state.count + this.props.countBy })
+    // this is where countBy is defined, 
   }
 
   decrement() {
-    this.setState({ count: this.state.count - 1 })
+    this.setState({ count: this.state.count - this.props.countBy })
   }
 
   render() {
