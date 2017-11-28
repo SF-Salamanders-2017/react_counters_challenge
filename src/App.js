@@ -10,9 +10,10 @@ class App extends React.Component {
       counters: [0, 0, 0]
     }
 
-    // this.increment = this.increment.bind(this)
-    // this.decrement = this.decrement.bind(this)
-    // this.totalCount = this.totalCount.bind(this)
+    this.increment = this.increment.bind(this)
+    this.decrement = this.decrement.bind(this)
+    this.totalCount = this.totalCount.bind(this)
+    this.remove = this.remove.bind(this)
   }
 
   increment(index, countBy) {
@@ -31,6 +32,12 @@ class App extends React.Component {
     return this.state.counters.reduce((sum, value) => value += sum)
   }
 
+  remove(index) {
+    let counters = this.state.counters
+    counters.splice(index, 1)
+    this.setState({counters})
+  }
+
   render() {
     return (
       <div className="page-center-frame">
@@ -41,6 +48,7 @@ class App extends React.Component {
               count = {counter}
               increment = {() => this.increment(index, index + 1)}
               decrement = {() => this.decrement(index, index + 1)}
+              remove = {() => this.remove(index)}
             />
           )}
         )}
