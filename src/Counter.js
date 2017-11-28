@@ -13,11 +13,15 @@ class Counter extends React.Component {
   // }
 
   // increment() {
-  //   this.setState({ count: this.state.count + this.props.prop })
+  //   this.setState({ count: 
+    // this.state.count + 1 })
+    // this.state.count + this.props.prop })
   // }
 
   // decrement() {
-  //   this.setState({ count: this.state.count - this.props.prop })
+  //   this.setState({ count: 
+    // this.state.count - 1 })
+    // this.state.count - this.props.prop })
   // }
 
   render() {
