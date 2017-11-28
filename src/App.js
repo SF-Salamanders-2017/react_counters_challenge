@@ -20,12 +20,15 @@ class App extends React.Component {
           multiplier: 3
         }
       ],
-      total: 0
+      total: 0,
+      newMultiplier: 0
     };
 
     this.increment = this.increment.bind(this)
     this.decrement = this.decrement.bind(this)
     this.total = this.total.bind(this)
+    this.addCounter = this.addCounter.bind(this)
+    this.handleMultiplierChange = this.handleMultiplierChange.bind(this)
   }
 
   increment(index) {
@@ -50,9 +53,28 @@ class App extends React.Component {
     }, 0);
   }
 
+  handleMultiplierChange(event) {
+    let value = parseInt(event.target.value, 10)
+    this.setState({newMultiplier: isNaN(value) ? 0 : value})
+  }
+
+  addCounter() {
+    const counters = this.state.counters
+    counters.push({count: 0, multiplier: (this.state.newMultiplier)})
+    this.setState({ counters, newMultiplier: 0 })
+  }
+
   render() {
     return (
       <div className="page-center-frame">
+        <div className="counter">
+          <p>Enter multiplier</p>
+          <div className="count">
+            <input onChange={this.handleMultiplierChange} type="text" value={this.state.newMultiplier} />
+          </div>
+          <button onClick={this.addCounter}>Add counter</button>
+        </div>
+
         {(this.state.counters).map((counter, index) =>
           <Counter
             increment={() => this.increment(index)}
