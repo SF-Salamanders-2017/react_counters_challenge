@@ -7,71 +7,59 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-    //   countOne: 0,
-    //   countTwo: 0,
-    //   countThree: 0
-      // counters: [0, 0, 0]
       counters: [
         {count: 0, countBy: 1},
         {count: 0, countBy: 2},
         {count: 0, countBy: 3}
-      ]
+      ],
+      newCountBy: 1
     };
 
     this.increment = this.increment.bind(this)
     this.decrement = this.decrement.bind(this)
     this.countTotal = this.countTotal.bind(this)
-    this.add = this.add.bind(this)
     this.setNewCountBy = this.setNewCountBy.bind(this)
+    this.add = this.add.bind(this)
     this.remove = this.remove.bind(this)
   }
 
-  // this.state.keys(keyName).map()
 
- // increment(keyName, countBy) {
- //    this.setState({ [keyName]: this.state[keyName] + countBy })
- //  }
-
- increment(index) {
+ increment(index, countBy) {
     return () => {
       const counters = this.state.counters
-      // counters[index] += (index + 1)
       counters[index].count += countBy
       this.setState({ counters: counters })
     }
   }
 
-  // decrement(keyName, countBy) {
-  //   return () => {
-  //     return this.setState({ [keyName]: this.state[keyName] - countBy })
-  //   }
-  // }
 
-  decrement(index) {
+  decrement(index, countBy) {
     return () => {
       const counters = this.state.counters
-      // counters[index] -= (index + 1)
       counters[index].count += countBy
       this.setState({ counters })
     }
   }
 
+
   countTotal(){
-    return this.state.counters.reduce((total, counter) =>
-      total + counter) 
+    return this.state.counters.reduce(
+      (total, counter) => total + counter.count
+      , 0) 
   }
 
-  // add(countBy) {
+
   add(event) {
+    event.preventDefault()
+
     let counters = this.state.counters
-    // counters.push({ count: 0, countBy})
-    counters.push({count: 0, countBy: this.state.newCountBy})
+    counters.push({
+      count: 0, 
+      countBy: this.state.newCountBy
+    })
     this.setState({ counters, newCountBy: 1 })
   }
 
-  setNewCountBy(event) {
-    this.setState({ newCountBy: parseInt(event.target.value) || 1 })
-  }
 
   remove(index) {
     let counters = this.state.counters
@@ -80,47 +68,22 @@ class App extends React.Component {
   }
 
 
-  // render() {
-  //   return (
-  //     <div className="page-center-frame">
-  //       {React.createElement.(Counter, { countBy: 1 })}
-  //       <Counter countBy={1} />
-  //       <Counter 
-  //       count={ this.state.countOne }
-  //       incrementProp={ () => this.increment("countOne", 1) } 
-  //       decrementProp={ this.decrement("countOne",1) } 
-  //       />
-  //       {React.createElement.(Counter, { countBy: 2 })}
-  //       <Counter countBy={2} />
-  //       <Counter
-  //       count={ this.state.countTwo }
-  //       incrementProp={ () => this.increment("countTwo",2) } 
-  //       decrementProp={ this.decrement("countTwo",2) }
-  //        />
-  //       {React.createElement.(Counter, { countBy: 1 })}
-  //       <Counter countBy={3} />
-  //       <Counter
-  //       count={ this.state.countThree }
-  //       incrementProp={ () => this.increment("countThree", 3) } 
-  //       decrementProp={ this.decrement("countThree", 3) }
-  //        />
-  //
-  //      <p>{ this.countTotal() }</p>
-  //     </div>
-  //   );
+  setNewCountBy(event) {
+    this.setState({ 
+      newCountBy: parseInt(event.target.value) || 1 
+    })
+  }
 
 
   render() {
     return (
       <div className="page-center-frame">
         { this.state.counters.map((counter, index) => 
-          return <Counter 
+          <Counter 
             count={ counter.count }
             key={ index.toString() }
-            // incrementProp={ this.increment(index) } 
-            incrementProp={ this.increment(index, counter.count) } 
-            // decrementProp={ this.decrement(index) } 
-            decrementProp={ this.decrement(index, counter.count) } 
+            incrementProp={ this.increment(index, counter.countBy) } 
+            decrementProp={ this.decrement(index, counter.countBy) } 
             remove={ () => this.remove(index) }
           />
         )}
@@ -129,14 +92,13 @@ class App extends React.Component {
           totalProp={ this.countTotal() }
         />
 
-        <form action="">
+        <form>
           <input 
             type="text" 
-            onChange={this.setNewCountBy
-            value={this.state.newCountBy}} 
+            onChange={ this.setNewCountBy }
+            value={ this.state.newCountBy }
             />
-          <button onClick={this.add(this.state.newCountBy)}</button>
-          <button onClick={this.add}>Add Counter</button>
+          <button onClick={ this.add }>Add Counter</button>
         </form>
       </div>
     );

@@ -6,7 +6,7 @@ class CounterTotal extends React.Component {
   render() {
     return (
       <div className="total">
-        TOTAL: { this.props.totalProp }
+        TOTAL: {this.props.totalProp}
       </div>
     );
   }
