@@ -14,6 +14,7 @@ class App extends React.Component {
     this.decrement = this.decrement.bind(this)
     this.totalCount = this.totalCount.bind(this)
     this.remove = this.remove.bind(this)
+    this.add = this.add.bind(this)
   }
 
   increment(index, countBy) {
@@ -38,6 +39,17 @@ class App extends React.Component {
     this.setState({counters})
   }
 
+  add(event) {
+    event.preventDefault();
+    this.state.counters
+    counters.push(count, newCountBy)
+  }
+
+  this.setState({count, newCountBy})
+
+  setNewCountBy(event) {
+    this.setState({newCountBy})
+  }
   render() {
     return (
       <div className="page-center-frame">
