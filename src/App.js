@@ -7,46 +7,84 @@ class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      counters: [0, 0, 0]
-    }
+      counters: [
+          {count: 0, countBy: 1},
+          {count: 0, countBy: 2},
+          {count: 0, countBy: 3}
+          ],
+          newCountBy: 1
+    };
 
-    // this.increment = this.increment.bind(this)
-    // this.decrement = this.decrement.bind(this)
-    // this.totalCount = this.totalCount.bind(this)
+    this.increment = this.increment.bind(this)
+    this.decrement = this.decrement.bind(this)
+    this.totalCount = this.totalCount.bind(this)
+    this.setNewCountBy = this.setNewCountBy.bind(this)
+    this.add = this.add.bind(this)
+    this.remove = this.remove.bind(this)
   }
 
   increment(index, countBy) {
-    const counters = this.state.counters
-    counters[index] += countBy
-    this.setState({counters})
+      const counters = this.state.counters
+      counters[index].count += countBy
+      this.setState({counters})
     }
 
   decrement(index, countBy) {
-    const counters = this.state.counters
-    counters[index] -= countBy
-    this.setState({counters})
+      const counters = this.state.counters
+      counters[index].count -= countBy
+      this.setState({counters})
     }
 
   totalCount() {
-    return this.state.counters.reduce((sum, value) => value += sum)
+    return this.state.counters.reduce(
+            (sum, counter) => sum + counter.count, 0)
   }
 
+  add(event) {
+    event.preventDefault()
+    let counters = this.state.counters
+    counters.push({
+        count: 0,
+        countBy: this.state.newCountBy
+    })
+    this.setState({ counters, newCountBy: 1})
+  }
+
+  remove(index) {
+    let counters = this.state.counters
+    counters.splice(index, 1)
+    this.setState({counters})
+  }
+
+  setNewCountBy(event) {
+    this.setState({
+      newCountBy: parseInt(event.target.value) || 1
+    })
+  }
   render() {
     return (
       <div className="page-center-frame">
-
         {this.state.counters.map((counter, index) => {
           return (
-            <Counter key = {index}
-              count = {counter}
+            <Counter
+              count = {counter.count}
+              key = {index}
               increment = {() => this.increment(index, index + 1)}
-              decrement = {() => this.decrement(index, index + 1)}
+              decrement = {() => this.decrement(index, index + 1 )}
+              remove = {() => this.remove(index)}
             />
           )}
         )}
         <div className="counter">
           Total: {this.totalCount()}
         </div>
+        <form>
+          <input type="text"
+            onChange={this.setNewCountBy}
+            value={this.state.newCountBy}
+            />
+          <button onClick={this.add}>Add Counter</button>
+        </form>
       </div>
     );
   }
