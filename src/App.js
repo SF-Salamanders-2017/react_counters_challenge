@@ -15,6 +15,7 @@ class App extends React.Component {
     };
       // this.incrementOne = this.incrementOne.bind(this)
       this.increment = this.increment.bind(this)
+      this.total = this.total.bind(this)
   }
 
   increment(index, increment) {
@@ -27,6 +28,12 @@ class App extends React.Component {
     const counters = this.state.counters
     counters[index].count -= decrement
     this.setState({ counters } );
+  }
+
+  total() {
+    return this.state.counters.reduce(
+      (total, counter) => total + counter.count
+    , 0)
   }
 
   render() {
@@ -45,11 +52,11 @@ class App extends React.Component {
             decrement={() => this.decrement(index, counter.increment)}
             count={counter.count}
             />
-          )
-          })}
+          )})
+        }
 
         <div>
-          Total:
+          Total: {this.total()}
         </div>
       </div>
     );
