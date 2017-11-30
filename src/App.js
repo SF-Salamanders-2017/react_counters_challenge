@@ -75,19 +75,20 @@ class App extends React.Component {
           )
           })
         }
-
-        <p>
-          Total: {this.total()}
-        </p>
-
-        <form>
-          <input
-            type = 'text'
-            onChange={this.setNewCountBy}
-            value={this.state.setNewCountBy}
-          />
-          <button onClick={this.add}>Add Counter</button>
-        </form>
+        <span>
+          <p>
+            Total: {this.total()}
+          </p>
+          <br/>
+          <button onClick={this.add}>Add Counter with count by:</button>
+          <form>
+            <input
+              type = 'text'
+              onChange={this.setNewCountBy}
+              value={this.state.setNewCountBy}
+            />
+          </form>
+        </span>
       </div>
     );
   }
