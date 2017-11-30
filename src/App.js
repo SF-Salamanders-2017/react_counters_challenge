@@ -7,24 +7,24 @@ class App extends React.Component {
     super();
     this.state = {
         counters: [
-          {count: 0, increment: 1},
-          {count: 0, increment: 2},
-          {count: 0, increment: 3}
+          {count: 0, countBy: 1},
+          {count: 0, countBy: 2},
+          {count: 0, countBy: 3}
       ]
     };
       this.increment = this.increment.bind(this)
       this.total = this.total.bind(this)
   }
 
-  increment(index, increment) {
+  increment(index, countBy) {
     const counters = this.state.counters
-    counters[index].count += increment
+    counters[index].count += countBy
     this.setState({ counters } );
   }
 
-  decrement(index, decrement) {
+  decrement(index, countBy) {
     const counters = this.state.counters
-    counters[index].count -= decrement
+    counters[index].count -= countBy
     this.setState({ counters } );
   }
 
@@ -40,8 +40,8 @@ class App extends React.Component {
         {this.state.counters.map((counter, index) => {
           return (
             <Counter
-            increment={() => this.increment(index, counter.increment)}
-            decrement={() => this.decrement(index, counter.increment)}
+            increment={() => this.increment(index, counter.countBy)}
+            decrement={() => this.decrement(index, counter.countBy)}
             count={counter.count}
             />
           )})
